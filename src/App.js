@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import CharComponent from "./components/CharComponent";
-import "./styles.css";
+import Input from "./components/Input";
 import ValidationComponent from "./components/ValidationComponent";
 
 function App() {
+  //I love using useState
+  //Very effective and neat
   const [inputText, setInputText] = useState("");
   const [buttonToggler, setButtonToggler] = useState(false);
 
+  //Character component
+  //Creating a list of the first character
+  //Delete any character when clicked
   const charList = inputText.split("").map((ch, index) => {
     return (
       <CharComponent
@@ -18,10 +23,6 @@ function App() {
     );
   });
 
-  function changeHandler(event) {
-    setInputText(event.target.value);
-  }
-
   function deleteItem(index) {
     const text = inputText.split("");
     text.splice(index, 1);
@@ -29,10 +30,12 @@ function App() {
     setInputText(updatedText);
   }
 
-  function buttonHandler() {
-    setButtonToggler(true);
+  //This is for the input
+  function changeHandler(event) {
+    setInputText(event.target.value);
   }
 
+  //Some dynamic styling
   const classes = [];
   if (inputText.length <= 5) {
     classes.push("blue");
@@ -41,18 +44,13 @@ function App() {
     classes.push("bold");
   }
 
+  //Creating a toggle effect for the button
   let button = null;
 
   if (buttonToggler) {
     button = (
       <div>
-        <input
-          onChange={changeHandler}
-          placeholder=" Type here"
-          maxLength={15}
-          value={inputText}
-        ></input>
-
+        <Input change={changeHandler} val={inputText} />
         <ValidationComponent text={inputText.length} />
         <ul className={classes.join(" ")}>{charList}</ul>
       </div>
