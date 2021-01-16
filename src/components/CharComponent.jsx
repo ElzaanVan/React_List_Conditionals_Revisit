@@ -5,7 +5,8 @@ const style = {
   padding: "16px",
   textAlign: "center",
   margin: "16px",
-  border: "1px solid black"
+  border: "1px solid #92817a",
+  borderRadius: "20%"
 };
 
 function CharComponent(props) {
