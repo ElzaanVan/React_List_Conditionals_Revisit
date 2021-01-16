@@ -2,7 +2,17 @@
   text-align: center;
   background: #d4e2d4;
   font-family: Roboto;
+  color: gray;
 }
 * {
   background: #d4e2d4;
+}
+
+.blue {
+  color: rgba(71, 105, 214, 0.979);
+}
+
+.bold {
+  font-style: bold;
+  font-size: 2rem;
 }

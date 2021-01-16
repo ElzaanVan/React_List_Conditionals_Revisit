@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CharComponent from "./components/CharComponent";
 import style from "./styles.css";
+import Radium, { StyleRoot } from "radium";
 import ValidationComponent from "./components/ValidationComponent";
 
 function App() {
@@ -21,8 +22,16 @@ function App() {
   const buttonStyle = {
     padding: "20px 20px",
     margin: "30px 25px",
-    backgroundColor: "slateblue",
-    color: "white"
+    backgroundColor: "#707070",
+    borderColor: "#92817a",
+    color: "white",
+    fontFamily: "arial",
+    fontStyle: "bold",
+    fontSize: "1.5rem",
+    ":hover": {
+      backgroundColor: "#bedbbb",
+      color: "black"
+    }
   };
 
   function changeHandler(event) {
@@ -40,6 +49,14 @@ function App() {
     setButtonToggler(true);
   }
 
+  const classes = [];
+  if (inputText.length <= 5) {
+    classes.push("blue");
+  }
+  if (inputText.length <= 15) {
+    classes.push("bold");
+  }
+
   let button = null;
 
   if (buttonToggler) {
@@ -53,21 +70,27 @@ function App() {
         ></input>
 
         <ValidationComponent text={inputText.length} />
-        <ul>{charList}</ul>
+        <ul className={classes.join(" ")}>{charList}</ul>
       </div>
     );
-    buttonStyle.backgroundColor = "green";
+    buttonStyle.backgroundColor = "#92817a";
+    buttonStyle[":hover"] = {
+      backgroundColor: "#bedbbb",
+      color: "black"
+    };
   }
 
   return (
-    <div className="App">
-      <h1>Hello</h1>
-      <button style={buttonStyle} onClick={buttonHandler}>
-        Click
-      </button>
-      {button}
-    </div>
+    <StyleRoot>
+      <div className="App">
+        <h1>Hello</h1>
+        <button style={buttonStyle} onClick={buttonHandler}>
+          Click
+        </button>
+        {button}
+      </div>
+    </StyleRoot>
   );
 }
 
-export default App;
+export default Radium(App);
