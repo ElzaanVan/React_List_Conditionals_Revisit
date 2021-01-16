@@ -41,7 +41,7 @@ function App() {
     classes.push("bold");
   }
 
-  let button = false;
+  let button = null;
 
   if (buttonToggler) {
     button = (
@@ -64,8 +64,9 @@ function App() {
       <h1>Hello</h1>
       <button
         className="button"
-        clicked={buttonToggler}
-        onClick={buttonHandler}
+        onClick={() => {
+          setButtonToggler(!buttonToggler);
+        }}
       >
         Click
       </button>

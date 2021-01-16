@@ -1,16 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+const StyledDiv = styled.div`
+  font-size: 5rem;
+  color: #393e46;
+
+  @media (max-width: 500px) {
+    font-size: 2rem;
+  }
+`;
 function ValidationComponent(props) {
-  const StyledDiv = styled.div`
-    font-size: 5rem;
-    color: #393e46;
-
-    @media (max-width: 500px) {
-      font-size: 2rem;
-    }
-  `;
-
   return (
     <StyledDiv>
       <p>{props.text}</p>
