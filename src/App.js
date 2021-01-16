@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import CharComponent from "./components/CharComponent";
-import Style from "./styles.css";
+import style from "./styles.css";
 import ValidationComponent from "./components/ValidationComponent";
 
 function App() {
   const [inputText, setInputText] = useState("");
+  const [buttonToggler, setButtonToggler] = useState(false);
 
   const charList = inputText.split("").map((ch, index) => {
     return (
@@ -17,6 +18,13 @@ function App() {
     );
   });
 
+  const buttonStyle = {
+    padding: "20px 20px",
+    margin: "30px 25px",
+    backgroundColor: "slateblue",
+    color: "white"
+  };
+
   function changeHandler(event) {
     setInputText(event.target.value);
   }
@@ -28,17 +36,36 @@ function App() {
     setInputText(updatedText);
   }
 
+  function buttonHandler() {
+    setButtonToggler(true);
+  }
+
+  let button = null;
+
+  if (buttonToggler) {
+    button = (
+      <div>
+        <input
+          onChange={changeHandler}
+          placeholder="Type here"
+          maxLength={15}
+          value={inputText}
+        ></input>
+
+        <ValidationComponent text={inputText.length} />
+        <ul>{charList}</ul>
+      </div>
+    );
+    buttonStyle.backgroundColor = "green";
+  }
+
   return (
     <div className="App">
       <h1>Hello</h1>
-      <input
-        onChange={changeHandler}
-        placeholder="Type here"
-        maxLength={15}
-        value={inputText}
-      ></input>
-      <ValidationComponent text={inputText.length} />
-      <ul>{charList}</ul>
+      <button style={buttonStyle} onClick={buttonHandler}>
+        Click
+      </button>
+      {button}
     </div>
   );
 }
