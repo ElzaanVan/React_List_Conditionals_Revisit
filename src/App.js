@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CharComponent from "./components/CharComponent";
 import style from "./styles.css";
-import Radium, { StyleRoot } from "radium";
+import styled from "styled-components";
 import ValidationComponent from "./components/ValidationComponent";
 
 function App() {
@@ -19,20 +19,20 @@ function App() {
     );
   });
 
-  const buttonStyle = {
-    padding: "20px 20px",
-    margin: "30px 25px",
-    backgroundColor: "#707070",
-    borderColor: "#92817a",
-    color: "white",
-    fontFamily: "arial",
-    fontStyle: "bold",
-    fontSize: "1.5rem",
-    ":hover": {
-      backgroundColor: "#bedbbb",
-      color: "black"
+  const StyledButton = styled.button`
+    padding: 20px 20px;
+    margin: 30px 25px;
+    background-color: ${(props) => (props.clicked ? "#707070" : "#c05555")};
+    border-color: #92817a;
+    color: white;
+    font-family: arial;
+    font-style: bold;
+    font-size: 1.5rem;
+    &:hover {
+      background-color: #bedbbb;
+      color: black;
     }
-  };
+  `;
 
   function changeHandler(event) {
     setInputText(event.target.value);
@@ -64,7 +64,7 @@ function App() {
       <div>
         <input
           onChange={changeHandler}
-          placeholder="Type here"
+          placeholder=" Type here"
           maxLength={15}
           value={inputText}
         ></input>
@@ -73,24 +73,17 @@ function App() {
         <ul className={classes.join(" ")}>{charList}</ul>
       </div>
     );
-    buttonStyle.backgroundColor = "#92817a";
-    buttonStyle[":hover"] = {
-      backgroundColor: "#bedbbb",
-      color: "black"
-    };
   }
 
   return (
-    <StyleRoot>
-      <div className="App">
-        <h1>Hello</h1>
-        <button style={buttonStyle} onClick={buttonHandler}>
-          Click
-        </button>
-        {button}
-      </div>
-    </StyleRoot>
+    <div className="App">
+      <h1>Hello</h1>
+      <StyledButton clicked={buttonToggler} onClick={buttonHandler}>
+        Click
+      </StyledButton>
+      {button}
+    </div>
   );
 }
 
-export default Radium(App);
+export default App;

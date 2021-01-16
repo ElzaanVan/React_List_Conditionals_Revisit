@@ -1,7 +1,8 @@
 .App {
   text-align: center;
   background: #d4e2d4;
-  font-family: Roboto;
+  font-family: Lobster;
+  font-size: 3rem;
   color: gray;
 }
 * {
@@ -15,4 +16,11 @@
 .bold {
   font-style: bold;
   font-size: 2rem;
+}
+
+input {
+  font-family: Roboto;
+  color: rgb(71, 65, 65);
+  font-size: 1.2rem;
+  border: 1px solid rgb(85, 80, 80);
 }
