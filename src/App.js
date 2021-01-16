@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CharComponent from "./components/CharComponent";
-import style from "./styles.css";
-import styled from "styled-components";
+import "./styles.css";
 import ValidationComponent from "./components/ValidationComponent";
 
 function App() {
@@ -18,21 +17,6 @@ function App() {
       />
     );
   });
-
-  const StyledButton = styled.button`
-    padding: 20px 20px;
-    margin: 30px 25px;
-    background-color: ${(props) => (props.clicked ? "#707070" : "#c05555")};
-    border-color: #92817a;
-    color: white;
-    font-family: arial;
-    font-style: bold;
-    font-size: 1.5rem;
-    &:hover {
-      background-color: #bedbbb;
-      color: black;
-    }
-  `;
 
   function changeHandler(event) {
     setInputText(event.target.value);
@@ -57,7 +41,7 @@ function App() {
     classes.push("bold");
   }
 
-  let button = null;
+  let button = false;
 
   if (buttonToggler) {
     button = (
@@ -78,9 +62,13 @@ function App() {
   return (
     <div className="App">
       <h1>Hello</h1>
-      <StyledButton clicked={buttonToggler} onClick={buttonHandler}>
+      <button
+        className="button"
+        clicked={buttonToggler}
+        onClick={buttonHandler}
+      >
         Click
-      </StyledButton>
+      </button>
       {button}
     </div>
   );

@@ -19,8 +19,23 @@
 }
 
 input {
-  font-family: Roboto;
+  font-family: arial;
   color: rgb(71, 65, 65);
   font-size: 1.2rem;
   border: 1px solid rgb(85, 80, 80);
+}
+.button {
+  padding: 20px 20px;
+  margin: 30px 25px;
+  background-color: #c05555;
+  border-color: #92817a;
+  color: white;
+  font-family: arial;
+  font-style: bold;
+  font-size: 1.5rem;
+}
+
+.button:hover {
+  background-color: #c05555;
+  color: black;
 }
