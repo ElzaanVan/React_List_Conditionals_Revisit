@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import CharComponent from "./components/CharComponent";
-import style from "./styles.css";
-import Radium, { StyleRoot } from "radium";
+import Input from "./components/Input";
 import ValidationComponent from "./components/ValidationComponent";
 
 function App() {
+  //I love using useState
+  //Very effective and neat
   const [inputText, setInputText] = useState("");
   const [buttonToggler, setButtonToggler] = useState(false);
 
+  //Character component
+  //Creating a list of the first character
+  //Delete any character when clicked
   const charList = inputText.split("").map((ch, index) => {
     return (
       <CharComponent
@@ -19,25 +23,6 @@ function App() {
     );
   });
 
-  const buttonStyle = {
-    padding: "20px 20px",
-    margin: "30px 25px",
-    backgroundColor: "#707070",
-    borderColor: "#92817a",
-    color: "white",
-    fontFamily: "arial",
-    fontStyle: "bold",
-    fontSize: "1.5rem",
-    ":hover": {
-      backgroundColor: "#bedbbb",
-      color: "black"
-    }
-  };
-
-  function changeHandler(event) {
-    setInputText(event.target.value);
-  }
-
   function deleteItem(index) {
     const text = inputText.split("");
     text.splice(index, 1);
@@ -45,10 +30,12 @@ function App() {
     setInputText(updatedText);
   }
 
-  function buttonHandler() {
-    setButtonToggler(true);
+  //This is for the input
+  function changeHandler(event) {
+    setInputText(event.target.value);
   }
 
+  //Some dynamic styling
   const classes = [];
   if (inputText.length <= 5) {
     classes.push("blue");
@@ -57,40 +44,33 @@ function App() {
     classes.push("bold");
   }
 
+  //Creating a toggle effect for the button
   let button = null;
 
   if (buttonToggler) {
     button = (
       <div>
-        <input
-          onChange={changeHandler}
-          placeholder="Type here"
-          maxLength={15}
-          value={inputText}
-        ></input>
-
+        <Input change={changeHandler} val={inputText} />
         <ValidationComponent text={inputText.length} />
         <ul className={classes.join(" ")}>{charList}</ul>
       </div>
     );
-    buttonStyle.backgroundColor = "#92817a";
-    buttonStyle[":hover"] = {
-      backgroundColor: "#bedbbb",
-      color: "black"
-    };
   }
 
   return (
-    <StyleRoot>
-      <div className="App">
-        <h1>Hello</h1>
-        <button style={buttonStyle} onClick={buttonHandler}>
-          Click
-        </button>
-        {button}
-      </div>
-    </StyleRoot>
+    <div className="App">
+      <h1>Hello</h1>
+      <button
+        className="button"
+        onClick={() => {
+          setButtonToggler(!buttonToggler);
+        }}
+      >
+        Click
+      </button>
+      {button}
+    </div>
   );
 }
 
-export default Radium(App);
+export default App;
